@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Confidentiality - YILD</title>
+    <meta name="description" content="Terms and confidentiality agreement for YILD.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mint: #B8D4CA;
+            --mint-light: #E8F2EE;
+            --mint-dark: #9AC4B6;
+            --charcoal: #3D3D3D;
+            --charcoal-light: #5A5A5A;
+            --white: #FFFFFF;
+            --off-white: #FAFBFA;
+            --bg: #F7F9F8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--charcoal);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 0;
+            background: rgba(247, 249, 248, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(184, 212, 202, 0.3);
+        }
+
+        nav .nav-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--charcoal-light);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--charcoal);
+        }
+
+        .nav-links a.nav-disabled {
+            color: var(--mint-dark);
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Content */
+        .terms-content {
+            padding: 160px 0 80px;
+        }
+
+        .terms-content h1 {
+            font-size: 36px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 40px;
+        }
+
+        .terms-content p {
+            font-size: 16px;
+            color: var(--charcoal-light);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .terms-content p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .company-info {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--mint-light);
+            font-size: 14px;
+            color: var(--charcoal-light);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+            padding: 14px 24px;
+            background: var(--charcoal);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn-back:hover {
+            background: var(--charcoal-light);
+        }
+
+        .btn-back svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            background: var(--charcoal);
+            color: var(--white);
+        }
+
+        .footer-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-copy {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .terms-content {
+                padding: 120px 0 60px;
+            }
+
+            .terms-content h1 {
+                font-size: 28px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        if (sessionStorage.getItem('yild_access') !== 'granted') {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html"><img src="logo.png" alt="YILD" class="nav-logo"></a>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="about.html">About</a>
+                <a href="mailto:hello@yild.app">Contact</a>
+                <a href="#" class="nav-disabled">Pricing</a>
+                <a href="#" class="nav-disabled">Data Room</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="terms-content">
+        <div class="container">
+            <h1>Terms & Confidentiality</h1>
+            
+            <p>All content made available on this site — including but not limited to text, concepts, product descriptions, technical architectures, workflows, designs, and visual material — is confidential and proprietary to YILD ApS, reg. no.&nbsp;DK36455128.</p>
+            
+            <p>This material is provided solely for the purpose of evaluation and dialogue. It may not be copied, shared, disclosed, published, or otherwise made available to any third party without the prior written consent of YILD&nbsp;ApS.</p>
+            
+            <p>All intellectual property rights, including copyrights, trademarks, and any other proprietary rights, remain the exclusive property of YILD ApS unless explicitly stated otherwise in&nbsp;writing.</p>
+            
+            <p>Unauthorized use, reproduction, or disclosure of the material may result in legal&nbsp;action.</p>
+            
+            <p>These terms shall be governed by and construed in accordance with the laws of Denmark, and any disputes arising out of or in connection with this site or its content shall be subject to the exclusive jurisdiction of the Danish&nbsp;courts.</p>
+
+            <div class="company-info">
+                YILD ApS · CVR DK36455128 · Copenhagen, Denmark
+            </div>
+
+            <a href="index.html" class="btn-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                Back
+            </a>
+        </div>
+    </main>
+
+    <script>
+        if (sessionStorage.getItem('scrollTop') === 'true') {
+            sessionStorage.removeItem('scrollTop');
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <a href="index.html"><img src="logo.png" alt="YILD" class="footer-logo"></a>
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="mailto:hello@yild.app">Contact</a>
+                    <a href="terms.html">Terms</a>
+                </div>
+                <p class="footer-copy">© 2025 YILD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

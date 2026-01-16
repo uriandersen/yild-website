@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - YILD</title>
+    <meta name="description" content="YILD is a design-driven fintech startup building intelligent SaaS for RMS-based CEF income investing.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mint: #B8D4CA;
+            --mint-light: #E8F2EE;
+            --mint-dark: #9AC4B6;
+            --charcoal: #3D3D3D;
+            --charcoal-light: #5A5A5A;
+            --white: #FFFFFF;
+            --off-white: #FAFBFA;
+            --bg: #F7F9F8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--charcoal);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 0;
+            background: rgba(247, 249, 248, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(184, 212, 202, 0.3);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 52px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--charcoal-light);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--charcoal);
+        }
+
+        .nav-links a.nav-disabled {
+            color: var(--mint-dark);
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 140px 0 60px;
+            background: var(--white);
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .page-header .lead {
+            font-size: 20px;
+            color: var(--charcoal-light);
+            max-width: 640px;
+            line-height: 1.6;
+        }
+
+        /* Company Section */
+        .company-section {
+            padding: 50px 0;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--mint-dark);
+            margin-bottom: 16px;
+        }
+
+        .company-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .company-text h2 {
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .company-text p {
+            font-size: 16px;
+            color: var(--charcoal-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .company-text p strong {
+            color: var(--charcoal);
+            font-weight: 600;
+        }
+
+        .company-image {
+            border-radius: 20px;
+            overflow: hidden;
+            max-width: 80%;
+            margin-left: auto;
+        }
+
+        .company-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 20px;
+        }
+
+        /* Vision Section */
+        .vision-section {
+            padding: 50px 0;
+            background: var(--white);
+        }
+
+        .vision-content {
+            max-width: 720px;
+        }
+
+        .vision-content h2 {
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .vision-content p {
+            font-size: 16px;
+            color: var(--charcoal-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .vision-content blockquote {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--charcoal);
+            line-height: 1.5;
+            padding-left: 24px;
+            border-left: 3px solid var(--mint);
+            margin: 32px 0;
+        }
+
+        /* Founder Section */
+        .founder-section {
+            padding: 50px 0;
+            background: linear-gradient(180deg, var(--bg) 0%, var(--mint-light) 100%);
+        }
+
+        .founder-card {
+            display: grid;
+            grid-template-columns: 210px 1fr;
+            gap: 60px;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 16px 48px rgba(61, 61, 61, 0.08);
+            align-items: start;
+        }
+
+        .founder-photo {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .founder-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .founder-info h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .founder-title {
+            font-size: 16px;
+            color: var(--mint-dark);
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .founder-bio p {
+            font-size: 15px;
+            color: var(--charcoal-light);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .founder-credentials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--mint-light);
+        }
+
+        .credential {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--bg);
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--charcoal);
+        }
+
+        .credential svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--mint-dark);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .founder-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .founder-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--charcoal);
+            transition: all 0.2s;
+        }
+
+        .founder-links a:hover {
+            background: var(--mint-light);
+        }
+
+        .founder-links a svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Details Section */
+        .details-section {
+            padding: 50px 0;
+            background: var(--white);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .detail-card {
+            padding: 32px;
+            background: var(--bg);
+            border-radius: 16px;
+        }
+
+        .detail-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--mint-dark);
+            margin-bottom: 16px;
+        }
+
+        .detail-card p {
+            font-size: 15px;
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            background: var(--charcoal);
+            color: var(--white);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-copy {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .company-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .company-image {
+                order: -1;
+            }
+
+            .founder-card {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 32px;
+            }
+
+            .founder-photo {
+                max-width: 200px;
+                margin: 0 auto;
+            }
+
+            .founder-info {
+                text-align: center;
+            }
+
+            .founder-credentials {
+                justify-content: center;
+            }
+
+            .founder-links {
+                justify-content: center;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 36px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        if (sessionStorage.getItem('yild_access') !== 'granted') {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <nav>
+        <div class="container">
+            <a href="index.html"><img src="logo.png" alt="YILD" class="nav-logo"></a>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="about.html" class="active">About</a>
+                <a href="mailto:hello@yild.app">Contact</a>
+                <a href="#" class="nav-disabled">Pricing</a>
+                <a href="#" class="nav-disabled">Data Room</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <p class="section-label">About YILD</p>
+            <h1>Design-driven meets fin-tech</h1>
+            <p class="lead">We're a Copenhagen-based, design-driven fintech start-up building software that makes RMS-style income investing operational — turning a proven methodology into clear, auditable workflows investors can follow consistently. YILD is venture-backed, reflecting institutional confidence in our execution-first&nbsp;approach.</p>
+        </div>
+    </header>
+
+    <section class="company-section">
+        <div class="container">
+            <div class="company-grid">
+                <div class="company-text">
+                    <h2>User needs at the core.</h2>
+                    <p>Founded in 2025, YILD sits at the intersection of real investor pain and modern infrastructure: messy broker data, manual tracking, and decision fatigue — especially for income portfolios with many moving&nbsp;parts.</p>
+                    <p>We translate Selengut-inspired RMS routines into a guided execution layer — clarifying what to do next, why it matters, and what has changed since the last review — so disciplined execution replaces manual&nbsp;spreadsheets.</p>
+                    <p>We're intentionally scoped as execution support: read-only portfolio visibility, cashflow awareness, rule-based prompts, and reconciliation. No custody, no discretionary management, and no automated&nbsp;trading.</p>
+                </div>
+                <div class="company-image">
+                    <img src="oldtimer.png" alt="Experienced investor  managing portfolio">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vision-section">
+        <div class="container">
+            <div class="vision-content">
+                <p class="section-label">Our Vision</p>
+                <h2>FIRE meets IFRI.</h2>
+                <p>Financial Independence, Retire Early becomes real when cashflow becomes reliable. The IFRI approach offers a practical path — diversified income combined with disciplined portfolio management — yet the day-to-day execution remains surprisingly&nbsp;manual.</p>
+                <blockquote>Our ambition is to use technology to ignite FIRE — not as an aspiration, but as an achievable reality for the Income-Focused Retirement&nbsp;Investor.</blockquote>
+                <p>We make the methodology easy to execute end-to-end: capturing holdings, normalising positions, computing relevant signals, and presenting the next relevant action with clear context — so disciplined, income-focused investing can be applied&nbsp;consistently.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="founder-section">
+        <div class="container">
+            <p class="section-label">Founder</p>
+            <div class="founder-card">
+                <div class="founder-photo">
+                    <img src="uri-andersen.jpg" alt="Uri Andersen">
+                </div>
+                <div class="founder-info">
+                    <h2>Uri Andersen</h2>
+                    <p class="founder-title">Founder & Product Lead</p>
+                    <div class="founder-bio">
+                        <p>Uri Andersen is a designer and digital product builder with 20+ years of experience creating software that removes friction from complex workflows. Based in Copenhagen,&nbsp;Denmark.</p>
+                        <p>He has worked across finance, medico and enterprise IT — shipping data-heavy products where clarity, trust and reliability&nbsp;matter.</p>
+                        <p>YILD is his attempt to bring product thinking and robust data workflows to the RMS world: simpler execution, safer routines, and more repeatable outcomes — without changing the principles that already&nbsp;work.</p>
+                    </div>
+                    <div class="founder-credentials">
+                        <div class="credential">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                            </svg>
+                            CBS, KADK, ITU
+                        </div>
+                        <div class="credential">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                            </svg>
+                            20+ years product design
+                        </div>
+                        <div class="credential">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                            Finance, Medico, IT
+                        </div>
+                        <div class="credential">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            Copenhagen, Denmark
+                        </div>
+                        <div class="credential">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                <polyline points="17 6 23 6 23 12"/>
+                            </svg>
+                            Active RMS Investor
+                        </div>
+                    </div>
+                    <div class="founder-links">
+                        <a href="mailto:hello@yild.app" title="Email">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/uriandersen/" target="_blank" rel="noopener" title="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="details-section">
+        <div class="container">
+            <div class="details-grid">
+                <div class="detail-card">
+                    <h3>Founded</h3>
+                    <p>2025 in Copenhagen, Denmark</p>
+                </div>
+                <div class="detail-card">
+                    <h3>Focus</h3>
+                    <p>End-to-end RMS execution. Simplified.</p>
+                </div>
+                <div class="detail-card">
+                    <h3>Contact</h3>
+                    <p><a href="mailto:hello@yild.app" style="color: var(--charcoal); text-decoration: underline;">hello@yild.app</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="index.html"><img src="logo.png" alt="YILD" class="footer-logo"></a>
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="mailto:hello@yild.app">Contact</a>
+                    <a href="terms.html">Terms</a>
+                </div>
+                <p class="footer-copy">© 2025 YILD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        if (sessionStorage.getItem('scrollTop') === 'true') {
+            sessionStorage.removeItem('scrollTop');
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
