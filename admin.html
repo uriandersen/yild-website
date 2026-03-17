@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — YILD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --dark: #0A0A0A;
+            --heading: #0A0A0A;
+            --body: #6B7280;
+            --body-strong: #374151;
+            --border: rgba(0,0,0,0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: url('BG-static.jpg') top center / cover no-repeat fixed;
+            background-color: #edf0f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 460px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .card.wide {
+            max-width: 800px;
+        }
+
+        .card-header {
+            background: linear-gradient(90deg, #d47ab0 0%, #c978b0 25%, #b978b0 50%, #ab78b1 75%, #a078b4 100%);
+            padding: 32px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-header img {
+            height: 36px;
+            width: auto;
+            mix-blend-mode: screen;
+        }
+
+        .card-body {
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 22px; font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--heading);
+            margin-bottom: 24px;
+        }
+
+        .input-group { margin-bottom: 20px; }
+        .input-group label {
+            display: block; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--body); margin-bottom: 8px;
+        }
+        .input-group input {
+            width: 100%; padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px; font-family: inherit;
+            color: var(--heading);
+            background: #FAFAFA;
+            transition: all 0.15s;
+        }
+        .input-group input:focus {
+            outline: none; border-color: #a078b4;
+            background: #FFF;
+            box-shadow: 0 0 0 3px rgba(160,120,180,0.12);
+        }
+
+        .btn-continue {
+            width: 100%; padding: 14px 24px;
+            background: var(--dark); color: var(--white);
+            border: none; border-radius: 8px;
+            font-size: 15px; font-weight: 600;
+            font-family: inherit; cursor: pointer;
+            margin-top: 4px;
+            transition: opacity 0.15s;
+        }
+        .btn-continue:disabled {
+            opacity: 0.5; cursor: not-allowed;
+        }
+        .btn-continue:not(:disabled):hover { opacity: 0.85; }
+
+        .error-message {
+            color: #FF5A5F; font-size: 12px;
+            font-weight: 600; margin-top: 6px; display: none;
+            text-align: center;
+        }
+        .error-message.visible { display: block; }
+
+        /* Admin panel styles */
+        .tabs {
+            display: flex; gap: 0; margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .tab {
+            padding: 10px 20px;
+            font-size: 13px; font-weight: 600;
+            color: var(--body);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.15s;
+            background: none; border-top: none; border-left: none; border-right: none;
+            font-family: inherit;
+        }
+        .tab.active {
+            color: #a078b4;
+            border-bottom-color: #a078b4;
+        }
+        .tab:hover:not(.active) { color: var(--body-strong); }
+
+        .count-badge {
+            display: inline-block;
+            background: #F0F0F0;
+            color: var(--body);
+            font-size: 11px; font-weight: 700;
+            padding: 1px 7px;
+            border-radius: 10px;
+            margin-left: 6px;
+        }
+        .tab.active .count-badge {
+            background: rgba(160,120,180,0.15);
+            color: #a078b4;
+        }
+
+        .requests-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .requests-table th {
+            text-align: left;
+            font-size: 10px; font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--body);
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .requests-table td {
+            padding: 12px;
+            color: var(--body-strong);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            vertical-align: middle;
+        }
+        .requests-table tr:last-child td { border-bottom: none; }
+
+        .status-badge {
+            display: inline-block;
+            font-size: 11px; font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+        .status-badge.pending { background: #FFF3E0; color: #E65100; }
+        .status-badge.approved { background: #E8F5E9; color: #2E7D32; }
+        .status-badge.rejected { background: #FFEBEE; color: #C62828; }
+
+        .action-btn {
+            padding: 6px 14px;
+            border: none; border-radius: 6px;
+            font-size: 12px; font-weight: 600;
+            font-family: inherit; cursor: pointer;
+            transition: opacity 0.15s;
+            margin-right: 4px;
+        }
+        .action-btn:hover { opacity: 0.8; }
+        .action-btn.approve { background: #E8F5E9; color: #2E7D32; }
+        .action-btn.reject { background: #FFEBEE; color: #C62828; }
+
+        .empty-state {
+            text-align: center; padding: 40px 20px;
+            color: var(--body); font-size: 14px;
+        }
+
+        .key-result {
+            background: #F5F5F5;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--body-strong);
+            line-height: 1.8;
+        }
+        .key-result strong {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--heading);
+            font-size: 15px;
+        }
+
+        .loading-text {
+            text-align: center; padding: 40px 20px;
+            color: var(--body); font-size: 14px;
+        }
+
+        .nda-footer {
+            text-align: center; margin-top: 24px;
+            font-size: 11px; color: rgba(107,114,128,0.6);
+            letter-spacing: 0.02em;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        .td-ip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--body);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Login view -->
+<div class="card" id="authCard">
+    <div class="card-header">
+        <img src="logo-w.png" alt="YILD">
+    </div>
+    <div class="card-body">
+        <h1>Admin</h1>
+        <form id="authForm">
+            <div class="input-group">
+                <label for="adminKey">Admin Access Key</label>
+                <input type="password" id="adminKey" placeholder="Enter admin key" required>
+                <p class="error-message" id="authError"></p>
+            </div>
+            <button type="submit" class="btn-continue" id="authBtn">Sign in</button>
+        </form>
+    </div>
+</div>
+
+<!-- Admin panel -->
+<div class="card wide" id="adminCard" style="display:none;">
+    <div class="card-header">
+        <img src="logo-w.png" alt="YILD">
+    </div>
+    <div class="card-body">
+        <h1>Access Requests</h1>
+
+        <div class="tabs">
+            <button class="tab active" data-status="pending">Pending <span class="count-badge" id="countPending">0</span></button>
+            <button class="tab" data-status="approved">Approved <span class="count-badge" id="countApproved">0</span></button>
+            <button class="tab" data-status="rejected">Rejected <span class="count-badge" id="countRejected">0</span></button>
+        </div>
+
+        <div id="tableContainer">
+            <p class="loading-text">Loading...</p>
+        </div>
+
+        <div id="keyResult" class="key-result" style="display:none;"></div>
+
+        <div class="nda-footer">YILD ApS &middot; Admin Panel</div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+    var sb = supabase.createClient(
+        'https://ibjwgqpoisuvsnrxafdc.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliandncXBvaXN1dnNucnhhZmRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc0NDc3NjEsImV4cCI6MjA4MzAyMzc2MX0.o110GQWN3DsmdcmMVvb8o1ZVjQzcj66gsd7aeU66M-0'
+    );
+
+    var allRequests = [];
+    var currentFilter = 'pending';
+    var adminKey = '';
+
+    // Auth form
+    var authForm = document.getElementById('authForm');
+    var authError = document.getElementById('authError');
+    var authBtn = document.getElementById('authBtn');
+
+    authForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var key = document.getElementById('adminKey').value.trim();
+        if (!key) return;
+
+        authBtn.disabled = true;
+        authBtn.textContent = 'Verifying\u2026';
+        authError.classList.remove('visible');
+
+        try {
+            var res = await sb.rpc('validate_access_key', {
+                p_key: key,
+                p_user_agent: navigator.userAgent,
+                p_ip_address: null
+            });
+
+            if (res.error) throw res.error;
+            var data = res.data;
+
+            if (data && data.ok) {
+                adminKey = key;
+                document.getElementById('authCard').style.display = 'none';
+                document.getElementById('adminCard').style.display = 'block';
+                loadRequests();
+            } else {
+                authError.textContent = (data && data.error) || 'Access denied';
+                authError.classList.add('visible');
+                authBtn.textContent = 'Sign in';
+                authBtn.disabled = false;
+            }
+        } catch (err) {
+            authError.textContent = 'Connection error. Please try again.';
+            authError.classList.add('visible');
+            authBtn.textContent = 'Sign in';
+            authBtn.disabled = false;
+        }
+    });
+
+    // Tabs
+    document.querySelectorAll('.tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+            tab.classList.add('active');
+            currentFilter = tab.dataset.status;
+            renderTable();
+        });
+    });
+
+    async function loadRequests() {
+        try {
+            var res = await sb.rpc('list_access_requests', { p_admin_key: adminKey });
+            if (res.error) throw res.error;
+            allRequests = res.data || [];
+            updateCounts();
+            renderTable();
+        } catch (err) {
+            var container = document.getElementById('tableContainer');
+            container.textContent = '';
+            var p = document.createElement('p');
+            p.className = 'empty-state';
+            p.textContent = 'Error loading requests: ' + (err.message || 'Unknown error');
+            container.appendChild(p);
+        }
+    }
+
+    function updateCounts() {
+        var counts = { pending: 0, approved: 0, rejected: 0 };
+        allRequests.forEach(function(r) { if (counts[r.status] !== undefined) counts[r.status]++; });
+        document.getElementById('countPending').textContent = counts.pending;
+        document.getElementById('countApproved').textContent = counts.approved;
+        document.getElementById('countRejected').textContent = counts.rejected;
+    }
+
+    function renderTable() {
+        var filtered = allRequests.filter(function(r) { return r.status === currentFilter; });
+        var container = document.getElementById('tableContainer');
+        container.textContent = '';
+        document.getElementById('keyResult').style.display = 'none';
+
+        if (filtered.length === 0) {
+            var p = document.createElement('p');
+            p.className = 'empty-state';
+            p.textContent = 'No ' + currentFilter + ' requests';
+            container.appendChild(p);
+            return;
+        }
+
+        var wrap = document.createElement('div');
+        wrap.className = 'table-wrap';
+
+        var table = document.createElement('table');
+        table.className = 'requests-table';
+
+        // thead
+        var thead = document.createElement('thead');
+        var headerRow = document.createElement('tr');
+        var headers = ['Name', 'Email', 'Company', 'Date', 'IP', 'Status'];
+        if (currentFilter === 'pending') headers.push('Actions');
+        headers.forEach(function(h) {
+            var th = document.createElement('th');
+            th.textContent = h;
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // tbody
+        var tbody = document.createElement('tbody');
+        filtered.forEach(function(r) {
+            var tr = document.createElement('tr');
+
+            var tdName = document.createElement('td');
+            tdName.textContent = r.name;
+            tr.appendChild(tdName);
+
+            var tdEmail = document.createElement('td');
+            tdEmail.textContent = r.email;
+            tr.appendChild(tdEmail);
+
+            var tdCompany = document.createElement('td');
+            tdCompany.textContent = r.company || '\u2014';
+            tr.appendChild(tdCompany);
+
+            var tdDate = document.createElement('td');
+            tdDate.textContent = new Date(r.created_at).toLocaleDateString('da-DK', { day: '2-digit', month: '2-digit', year: '2-digit' });
+            tr.appendChild(tdDate);
+
+            var tdIp = document.createElement('td');
+            tdIp.className = 'td-ip';
+            tdIp.textContent = r.ip_address || '\u2014';
+            tr.appendChild(tdIp);
+
+            var tdStatus = document.createElement('td');
+            var badge = document.createElement('span');
+            badge.className = 'status-badge ' + r.status;
+            badge.textContent = r.status;
+            tdStatus.appendChild(badge);
+            tr.appendChild(tdStatus);
+
+            if (currentFilter === 'pending') {
+                var tdActions = document.createElement('td');
+
+                var approveBtn = document.createElement('button');
+                approveBtn.className = 'action-btn approve';
+                approveBtn.textContent = 'Approve';
+                approveBtn.addEventListener('click', (function(id, name, email) {
+                    return function() { reviewRequest(id, 'approved', name, email); };
+                })(r.id, r.name, r.email));
+                tdActions.appendChild(approveBtn);
+
+                var rejectBtn = document.createElement('button');
+                rejectBtn.className = 'action-btn reject';
+                rejectBtn.textContent = 'Reject';
+                rejectBtn.addEventListener('click', (function(id, name, email) {
+                    return function() { reviewRequest(id, 'rejected', name, email); };
+                })(r.id, r.name, r.email));
+                tdActions.appendChild(rejectBtn);
+
+                tr.appendChild(tdActions);
+            }
+
+            tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        wrap.appendChild(table);
+        container.appendChild(wrap);
+    }
+
+    async function reviewRequest(id, decision, name, email) {
+        try {
+            var res = await sb.rpc('review_access_request', {
+                p_admin_key: adminKey,
+                p_request_id: id,
+                p_decision: decision
+            });
+
+            if (res.error) throw res.error;
+            var data = res.data;
+
+            if (decision === 'approved' && data && data.access_key) {
+                var resultEl = document.getElementById('keyResult');
+                resultEl.textContent = '';
+
+                var line1 = document.createTextNode('Approved: ' + name + ' (' + email + ')');
+                resultEl.appendChild(line1);
+                resultEl.appendChild(document.createElement('br'));
+
+                var line2text = document.createTextNode('Access Key: ');
+                resultEl.appendChild(line2text);
+                var keyStrong = document.createElement('strong');
+                keyStrong.textContent = data.access_key;
+                resultEl.appendChild(keyStrong);
+                resultEl.appendChild(document.createElement('br'));
+
+                var hint = document.createElement('span');
+                hint.style.cssText = 'font-size:11px;color:var(--body);';
+                hint.textContent = 'Copy this key and send it to the user.';
+                resultEl.appendChild(hint);
+
+                resultEl.style.display = 'block';
+            }
+
+            // Reload
+            await loadRequests();
+
+        } catch (err) {
+            alert('Error: ' + (err.message || 'Unknown error'));
+        }
+    }
+</script>
+</body>
+</html>

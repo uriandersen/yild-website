@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDA — YILD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --dark: #0A0A0A;
+            --heading: #0A0A0A;
+            --body: #6B7280;
+            --body-strong: #374151;
+            --border: rgba(0,0,0,0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: url('BG-static.jpg') top center / cover no-repeat fixed;
+            background-color: #edf0f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 460px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(90deg, #d47ab0 0%, #c978b0 25%, #b978b0 50%, #ab78b1 75%, #a078b4 100%);
+            padding: 32px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-header img {
+            height: 36px;
+            width: auto;
+            mix-blend-mode: screen;
+        }
+
+        .card-body {
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 22px; font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--heading);
+            margin-bottom: 24px;
+        }
+
+        .nda-scroll {
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 13px; color: var(--body);
+            line-height: 1.7; margin-bottom: 28px;
+            padding: 20px 24px;
+            background: #F5F5F5;
+            border-radius: 8px;
+        }
+        .nda-scroll p { margin-bottom: 16px; }
+        .nda-scroll p:last-child { margin-bottom: 0; }
+        .nda-scroll ul {
+            margin: 0 0 0 8px;
+            padding: 0;
+            list-style: none;
+        }
+        .nda-scroll ul li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 6px;
+        }
+        .nda-scroll ul li::before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: var(--body);
+        }
+
+        .checkbox-container {
+            display: flex; align-items: flex-start; gap: 12px;
+            margin-bottom: 28px; cursor: pointer;
+        }
+        .checkbox-container input { display: none; }
+        .checkbox-custom {
+            width: 22px; height: 22px; flex-shrink: 0;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 5px;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.15s; margin-top: 2px;
+        }
+        .checkbox-container input:checked + .checkbox-custom {
+            background: #a078b4; border-color: #a078b4;
+        }
+        .checkbox-custom svg {
+            width: 12px; height: 12px;
+            stroke: #FFF; stroke-width: 3;
+            opacity: 0; transition: opacity 0.15s;
+        }
+        .checkbox-container input:checked + .checkbox-custom svg { opacity: 1; }
+        .checkbox-label { font-size: 13px; color: var(--body-strong); line-height: 1.5; }
+
+        .btn-continue {
+            width: 100%; padding: 14px 24px;
+            background: var(--dark); color: var(--white);
+            border: none; border-radius: 8px;
+            font-size: 15px; font-weight: 600;
+            font-family: inherit; cursor: pointer;
+            transition: opacity 0.15s;
+        }
+        .btn-continue:disabled {
+            opacity: 0.5; cursor: not-allowed;
+        }
+        .btn-continue:not(:disabled):hover { opacity: 0.85; }
+
+        .nda-footer {
+            text-align: center; margin-top: 24px;
+            font-size: 11px; color: rgba(107,114,128,0.6);
+            letter-spacing: 0.02em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="card-header">
+        <img src="logo-w.png" alt="YILD">
+    </div>
+    <div class="card-body">
+        <h1>Non-Disclosure Agreement</h1>
+
+        <div class="nda-scroll">
+            <p>This site contains confidential and proprietary information belonging to YILD&nbsp;ApS. By proceeding, you confirm that you are accessing this material solely for evaluation purposes, that you will treat all content as confidential, and that you will not disclose, distribute, copy, or reference any part of it without prior written consent from YILD&nbsp;ApS.</p>
+
+            <p>Specifically, you agree to:</p>
+            <ul>
+                <li>Not share, forward, or reproduce any content from this platform</li>
+                <li>Not discuss platform details with unauthorized parties</li>
+                <li>Not use any information for competitive purposes</li>
+                <li>Return or destroy all materials upon request</li>
+                <li>Acknowledge that violation may result in legal action</li>
+            </ul>
+        </div>
+
+        <label class="checkbox-container" id="checkboxLabel">
+            <input type="checkbox" id="ndaCheckbox">
+            <span class="checkbox-custom">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </span>
+            <span class="checkbox-label">I have read and agree to the&nbsp;NDA</span>
+        </label>
+
+        <button class="btn-continue" id="acceptBtn" disabled>Accept and Continue</button>
+
+        <div class="nda-footer">YILD ApS &middot; Confidential &middot; NDA v1.0</div>
+    </div>
+</div>
+
+<script>
+    var checkbox = document.getElementById('ndaCheckbox');
+    var btn = document.getElementById('acceptBtn');
+
+    checkbox.addEventListener('change', function() {
+        btn.disabled = !checkbox.checked;
+    });
+
+    btn.addEventListener('click', function() {
+        if (!checkbox.checked) return;
+        sessionStorage.setItem('nda_accepted', new Date().toISOString());
+        window.location.href = 'request.html';
+    });
+</script>
+</body>
+</html>
