@@ -324,36 +324,11 @@
     </style>
 </head>
 <body>
-
-<!-- ── NDA GATE ── -->
-<div id="nda-gate" style="display:none; min-height:100vh; font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:url('BG-static.jpg') top center/cover no-repeat fixed; background-color:#edf0f5; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; -webkit-font-smoothing:antialiased;">
-    <div style="width:100%; max-width:460px; background:rgba(255,255,255,0.92); border-radius:16px; overflow:hidden;">
-        <div style="background:linear-gradient(90deg,#d47ab0 0%,#c978b0 25%,#b978b0 50%,#ab78b1 75%,#a078b4 100%); padding:32px 40px; display:flex; align-items:center; justify-content:center;">
-            <img src="logo-w.png" alt="YILD" style="height:36px; width:auto; mix-blend-mode:screen;">
-        </div>
-        <div style="padding:40px;">
-            <h1 style="font-size:22px; font-weight:700; letter-spacing:-0.02em; color:#0A0A0A; margin:0 0 24px 0;">Confidential access</h1>
-            <div style="font-size:13px; color:#6B7280; line-height:1.7; margin-bottom:28px; padding:16px 20px; background:#F5F5F5; border-radius:8px;">
-                This site contains confidential and proprietary information belonging to YILD ApS. By proceeding, you confirm that you are accessing this material solely for evaluation purposes, that you will treat all content as confidential, and that you will not disclose, distribute, copy, or reference any part of it without prior written consent from YILD&nbsp;ApS.
-            </div>
-            <form id="ndaForm">
-                <label style="display:flex; align-items:flex-start; gap:12px; margin-bottom:28px; cursor:pointer;">
-                    <input type="checkbox" id="ndaCheckbox" required style="width:18px; height:18px; margin-top:2px; accent-color:#a078b4;">
-                    <span style="font-size:13px; color:#374151; line-height:1.5;">I confirm that I understand and accept these confidentiality&nbsp;obligations.</span>
-                </label>
-                <div style="margin-bottom:20px;">
-                    <label for="ndaAccessKey" style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#6B7280; margin-bottom:8px;">Access Key</label>
-                    <input type="password" id="ndaAccessKey" placeholder="Enter your access key" required style="width:100%; padding:12px 16px; border:1px solid rgba(0,0,0,0.1); border-radius:8px; font-size:15px; font-family:inherit; color:#0A0A0A; background:#FAFAFA; box-sizing:border-box;">
-                    <p id="ndaError" style="color:#FF5A5F; font-size:12px; font-weight:600; margin-top:6px; display:none;">Invalid access key. Please try again.</p>
-                </div>
-                <button type="submit" style="width:100%; padding:14px 24px; background:#0A0A0A; color:#FFFFFF; border:none; border-radius:8px; font-size:15px; font-weight:600; font-family:inherit; cursor:pointer; margin-top:4px;">Continue</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- ── LANDING PAGE ── -->
-<div id="landing" style="display:none;">
+<script>
+        if (sessionStorage.getItem('yild_access') !== 'granted') {
+            window.location.replace('access.html');
+        }
+    </script>
 
 <nav>
     <div class="container">
@@ -571,53 +546,6 @@
         </div>
     </div>
 </footer>
-
-</div><!-- /landing -->
-
-<!-- ── PAGE ROUTER ── -->
-<script>
-(function() {
-    var gate = document.getElementById('nda-gate');
-    var landing = document.getElementById('landing');
-    if (sessionStorage.getItem('yild_access') === 'granted') {
-        gate.style.display = 'none';
-        landing.style.display = '';
-    } else {
-        gate.style.display = '';
-        landing.style.display = 'none';
-    }
-    var form = document.getElementById('ndaForm');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        var cb = document.getElementById('ndaCheckbox');
-        var key = document.getElementById('ndaAccessKey');
-        var err = document.getElementById('ndaError');
-        if (!cb.checked) return;
-        if (key.value === '9999-') {
-            sessionStorage.setItem('yild_access', 'granted');
-            sessionStorage.setItem('yild_notify', 'true');
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    access_key: 'dacb730c-1766-408c-bdfc-19e6e3f58e7a',
-                    subject: 'YILD NDA Login',
-                    message: 'Someone logged in to yild.app at ' + new Date().toISOString()
-                })
-            });
-            gate.style.display = 'none';
-            landing.style.display = '';
-        } else {
-            err.style.display = 'block';
-            key.style.borderColor = '#FF5A5F';
-        }
-    });
-    document.getElementById('ndaAccessKey').addEventListener('input', function() {
-        document.getElementById('ndaError').style.display = 'none';
-        this.style.borderColor = '';
-    });
-})();
-</script>
 
 <!-- no hero visual -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
