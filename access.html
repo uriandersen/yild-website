@@ -33,14 +33,14 @@
         .card {
             width: 100%;
             max-width: 460px;
-            background: #111111;
+            background: rgba(255,255,255,0.92);
             border-radius: 16px;
             overflow: hidden;
         }
 
         .card-header {
-            background: #000000;
-            padding: 40px 40px 24px;
+            background: linear-gradient(90deg, #d47ab0 0%, #c978b0 25%, #b978b0 50%, #ab78b1 75%, #a078b4 100%);
+            padding: 32px 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -49,6 +49,7 @@
         .card-header img {
             height: 52px;
             width: auto;
+            mix-blend-mode: screen;
         }
 
         .card-body {
@@ -58,18 +59,18 @@
         h1 {
             font-size: 22px; font-weight: 700;
             letter-spacing: -0.02em;
-            color: #FFFFFF;
+            color: var(--heading);
             margin-bottom: 12px;
         }
 
         .intro-text {
-            font-size: 14px; color: rgba(255,255,255,0.55);
+            font-size: 14px; color: var(--body);
             line-height: 1.7; margin-bottom: 32px;
         }
 
         .btn-continue {
             width: 100%; padding: 14px 24px;
-            background: #FFFFFF; color: #000000;
+            background: var(--dark); color: var(--white);
             border: none; border-radius: 8px;
             font-size: 15px; font-weight: 600;
             font-family: inherit; cursor: pointer;
@@ -85,10 +86,10 @@
             text-align: center;
             margin-top: 20px;
             font-size: 13px;
-            color: rgba(255,255,255,0.4);
+            color: var(--body);
         }
         .alt-link a {
-            color: rgba(255,255,255,0.7);
+            color: #a078b4;
             text-decoration: none;
             font-weight: 500;
         }
@@ -96,7 +97,7 @@
 
         .nda-footer {
             text-align: center; margin-top: 24px;
-            font-size: 11px; color: rgba(255,255,255,0.25);
+            font-size: 11px; color: rgba(107,114,128,0.6);
             letter-spacing: 0.02em;
         }
     </style>

@@ -32,14 +32,14 @@
         .card {
             width: 100%;
             max-width: 460px;
-            background: #111111;
+            background: rgba(255,255,255,0.92);
             border-radius: 16px;
             overflow: hidden;
         }
 
         .card-header {
-            background: #000000;
-            padding: 40px 40px 24px;
+            background: linear-gradient(90deg, #d47ab0 0%, #c978b0 25%, #b978b0 50%, #ab78b1 75%, #a078b4 100%);
+            padding: 32px 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -48,6 +48,7 @@
         .card-header img {
             height: 52px;
             width: auto;
+            mix-blend-mode: screen;
         }
 
         .card-body {
@@ -57,17 +58,17 @@
         h1 {
             font-size: 22px; font-weight: 700;
             letter-spacing: -0.02em;
-            color: #FFFFFF;
+            color: var(--heading);
             margin-bottom: 24px;
         }
 
         .nda-scroll {
             max-height: 400px;
             overflow-y: auto;
-            font-size: 13px; color: rgba(255,255,255,0.55);
+            font-size: 13px; color: var(--body);
             line-height: 1.7; margin-bottom: 28px;
             padding: 20px 24px;
-            background: rgba(255,255,255,0.06);
+            background: #F5F5F5;
             border-radius: 8px;
         }
         .nda-scroll p { margin-bottom: 16px; }
@@ -86,7 +87,7 @@
             content: "\2022";
             position: absolute;
             left: 0;
-            color: rgba(255,255,255,0.35);
+            color: var(--body);
         }
 
         .checkbox-container {
@@ -96,7 +97,7 @@
         .checkbox-container input { display: none; }
         .checkbox-custom {
             width: 22px; height: 22px; flex-shrink: 0;
-            border: 2px solid rgba(255,255,255,0.25);
+            border: 2px solid rgba(0,0,0,0.2);
             border-radius: 5px;
             display: flex; align-items: center; justify-content: center;
             transition: all 0.15s; margin-top: 2px;
@@ -110,11 +111,11 @@
             opacity: 0; transition: opacity 0.15s;
         }
         .checkbox-container input:checked + .checkbox-custom svg { opacity: 1; }
-        .checkbox-label { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+        .checkbox-label { font-size: 13px; color: var(--body-strong); line-height: 1.5; }
 
         .btn-continue {
             width: 100%; padding: 14px 24px;
-            background: #FFFFFF; color: #000000;
+            background: var(--dark); color: var(--white);
             border: none; border-radius: 8px;
             font-size: 15px; font-weight: 600;
             font-family: inherit; cursor: pointer;
@@ -127,7 +128,7 @@
 
         .nda-footer {
             text-align: center; margin-top: 24px;
-            font-size: 11px; color: rgba(255,255,255,0.25);
+            font-size: 11px; color: rgba(107,114,128,0.6);
             letter-spacing: 0.02em;
         }
     </style>
