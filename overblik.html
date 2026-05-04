@@ -68,16 +68,22 @@
     width: 100%;
     margin-bottom: 28px;
     font-size: 12px;
+    table-layout: fixed;
   }
   th, td {
     padding: 5px 10px;
     text-align: right;
     border: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   th:first-child, td:first-child {
     text-align: left;
     font-weight: normal;
-    width: 38%;
+    width: 30%;
+  }
+  th:not(:first-child), td:not(:first-child) {
+    width: 10%;
   }
   thead .label-row td {
     border-bottom: 1px solid #999;
