@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YILD - CEF Income Investing. Simplified.</title>
+<link rel="canonical" href="https://yild.app/preview-2026/">
+<link rel="icon" href="../LOGO_YILD_600x600.png">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="YILD is the everyday operating layer for CEF income investing - makes discipline frictionless, down to the exact lot. Your portfolio, your rules. Simplified.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#f2f2f0; --ink:#111111; --card:#FFFFFF; --dark:#2D2D2D;
+--muted:#999999; --line:rgba(0,0,0,0.12);
+--blue:#3475E0; --blue-deep:#1B4F9C; --eq:#1A73E8; --tf:#00C853; --tx:#FFB800;
+--sell:#E8364F; --red:#F44336; --neutral:#a9a9a8;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{ font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased; line-height:1.6; font-size:16px; }
+.mono{ font-family:'IBM Plex Mono',monospace; }
+.container{ max-width:1140px; margin:0 auto; padding:0 24px; }
+.mock-note{ background:#111; color:#e8e8e8; font-family:'IBM Plex Mono',monospace; font-size:11px; text-align:center; padding:7px 12px; letter-spacing:.3px; }
+.mock-note b{ color:#fff; }
+.stickytop{ position:sticky; top:0; z-index:100; }
+nav{ position:relative; z-index:100; background:rgba(242,242,240,0.85); backdrop-filter:saturate(1.1) blur(8px); border-bottom:1px solid var(--line); }
+nav .container{ height:64px; display:flex; align-items:center; justify-content:space-between; }
+.brand{ display:flex; align-items:center; gap:10px; }
+.brand .wm{ height:34px; width:auto; display:block; }
+.brand .wordtext{ font-weight:700; font-size:22px; letter-spacing:-0.04em; color:var(--ink); }
+.nav-links{ display:flex; align-items:center; gap:28px; }
+.nav-links a{ color:#666; text-decoration:none; font-size:14px; font-weight:500; transition:color .15s; }
+.nav-links a:hover{ color:var(--ink); }
+.btn{ font-family:'DM Sans',sans-serif; font-size:14px; font-weight:700; border:none; border-radius:8px; padding:10px 18px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:opacity .15s, background .15s; }
+.btn.dark{ background:var(--dark); color:#fff; }
+.btn.dark:hover{ opacity:.88; }
+.btn.ghost{ background:transparent; color:var(--ink); border:1px solid rgba(0,0,0,0.2); }
+.btn.ghost:hover{ background:rgba(0,0,0,0.04); }
+.nav-off{ color:#bbb; font-size:14px; font-weight:500; cursor:default; }
+.foot-links .nav-off{ color:rgba(255,255,255,0.25); }
+.req-ov{ position:fixed; inset:0; background:rgba(0,0,0,0.45); display:none; align-items:center; justify-content:center; z-index:200; padding:20px; }
+.req-ov.show{ display:flex; }
+.req{ background:#fff; border-radius:12px; padding:32px; width:100%; max-width:440px; box-shadow:0 20px 60px rgba(0,0,0,0.2); }
+.req h3{ font-size:22px; font-weight:700; letter-spacing:-0.02em; margin-bottom:6px; }
+.req p{ font-size:14px; color:#6B7280; margin-bottom:20px; }
+.req label{ display:block; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.4px; color:#374151; margin:14px 0 6px; font-family:'IBM Plex Mono',monospace; }
+.req input, .req select{ width:100%; font-family:'DM Sans',sans-serif; font-size:15px; padding:11px 12px; border:1px solid rgba(0,0,0,0.2); border-radius:8px; background:#fff; color:#111; }
+.req .row{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.req .acts{ display:flex; gap:10px; margin-top:24px; }
+.req .acts .btn{ flex:1; justify-content:center; }
+.hero{ padding:72px 0 64px; }
+.hero .container{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+.hero-visual{ position:relative; }
+.eyebrow{ display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.6px; color:#111; background:transparent; border:1px solid rgba(0,0,0,0.2); border-radius:100px; padding:7px 14px; margin-bottom:26px; }
+h1{ font-size:52px; line-height:1.06; letter-spacing:-0.04em; font-weight:700; color:var(--ink); }
+.descriptor{ font-size:19px; font-weight:600; color:#374151; margin-top:14px; letter-spacing:-0.01em; }
+.lede{ font-size:16px; color:#6B7280; line-height:1.7; margin-top:20px; max-width:520px; }
+.cta-row{ display:flex; align-items:center; gap:12px; margin-top:30px; }
+.micro{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:.3px; margin-top:18px; text-transform:uppercase; }
+.stack{ position:relative; z-index:1; background:#fff; border-radius:10px; padding:14px; box-shadow:0 12px 40px rgba(0,0,0,0.06); overflow:hidden; }
+.stack-head{ display:flex; align-items:center; justify-content:space-between; padding:6px 8px 14px; }
+.stack-title{ font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#666; }
+.market-tag{ font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; padding:6px 12px; border-radius:4px; background:#111; color:var(--tf); }
+.sc{ background:#F0F0F0; border-radius:6px; margin-bottom:10px; border-left:5px solid transparent; overflow:hidden; transition:transform .5s ease; }
+.sc:last-child{ margin-bottom:0; }
+.sc.sell{ border-left-color:var(--sell); }
+.sc.buy{ border-left-color:var(--blue-deep); }
+.sc-pill{ padding:9px 14px; display:flex; align-items:center; justify-content:space-between; }
+.sc-pill-left{ display:flex; align-items:center; gap:8px; }
+.sc-ticker{ font-family:'IBM Plex Mono',monospace; font-size:19px; font-weight:700; padding:2px 10px; border-radius:4px; line-height:1.2; color:#fff; display:inline-flex; align-items:center; gap:8px; }
+.sc-ticker.eq{ background:var(--eq); } .sc-ticker.tf{ background:var(--tf); } .sc-ticker.tx{ background:var(--tx); color:#111; }
+.sc-yld{ font-weight:400; font-size:16px; }
+.sc-type{ font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:700; color:#111; text-transform:uppercase; letter-spacing:.5px; }
+.sc-body{ padding:4px 14px 12px; }
+.sc-name{ font-size:13px; color:#111; font-weight:500; margin-bottom:8px; }
+.sc-badges{ display:flex; gap:6px; }
+.sc-badge{ padding:4px 11px; border-radius:6px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.3px; }
+.sc-badge.urg{ background:var(--sell); color:#fff; }
+.sc-badge.win{ background:#111; color:#fff; }
+.sc-badge.gain{ background:rgba(0,0,0,0.06); color:#111; }
+.sc-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.sc-actions{ display:flex; align-items:center; gap:4px; flex-shrink:0; }
+.sc-act{ width:28px; height:28px; display:flex; align-items:center; justify-content:center; border-radius:6px; color:#666; transition:all .12s; }
+.sc-act svg{ width:15px; height:15px; stroke:currentColor; stroke-width:2.2; fill:none; }
+.sc-x.hit{ background:#E8364F; color:#fff; }
+.sc-v.hit{ background:#1A73E8; color:#fff; }
+.blur{ filter:blur(3px); user-select:none; }
+.cl{ color:inherit; text-decoration:underline; text-underline-offset:3px; }
+.rms{ color:#6FAEFF; font-weight:700; letter-spacing:.02em; }
+.ec{ color:#D4A648; font-weight:700; }
+section{ padding:60px 0; }
+.sec-label{ display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.6px; color:#111; border:1px solid rgba(0,0,0,0.2); border-radius:100px; padding:7px 14px; margin-bottom:24px; }
+h2{ font-size:34px; font-weight:700; letter-spacing:-0.03em; line-height:1.2; color:var(--ink); max-width:640px; }
+.sec-sub{ font-size:16px; color:#6B7280; line-height:1.7; max-width:600px; margin-top:12px; }
+.grid3{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:40px; }
+.fcard{ background:var(--card); border-radius:6px; padding:28px 26px; }
+.ficon{ width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; background:#2D2D2D; }
+.ficon svg{ width:20px; height:20px; stroke:#fff; stroke-width:1.7; fill:none; }
+.fcard h3{ font-size:16px; font-weight:700; margin-bottom:8px; color:var(--ink); }
+.fcard p{ font-size:14px; color:#6B7280; line-height:1.65; }
+.ops{ background:var(--dark); border-radius:16px; padding:48px 44px; color:#fff; }
+.ops-lead{ max-width:690px; }
+.ops-lead h2{ color:#fff; font-size:28px; }
+.ops-lead p{ color:rgba(255,255,255,0.62); font-size:15px; line-height:1.75; margin-top:14px; }
+.ops-btn{ margin-top:28px; display:inline-flex; align-items:center; gap:10px; background:#fff; color:#111; font-family:'DM Sans',sans-serif; font-weight:700; font-size:14px; border:none; border-radius:8px; padding:12px 20px; cursor:pointer; transition:opacity .15s; }
+.ops-btn:hover{ opacity:.9; }
+.ops-btn .ic-layer{ width:16px; height:16px; stroke:#111; stroke-width:1.7; fill:none; }
+.ops-btn .ic-chev{ width:14px; height:14px; stroke:#111; stroke-width:2; fill:none; transition:transform .4s ease; }
+.ops-btn.open .ic-chev{ transform:rotate(180deg); }
+.ops-steps{ display:flex; align-items:flex-start; justify-content:center; max-height:0; opacity:0; overflow:hidden; margin-top:0;
+transition:max-height .6s ease, opacity .4s ease, margin-top .6s ease; }
+.ops-steps.show{ max-height:820px; opacity:1; margin-top:46px; }
+.ops-step{ flex:0 0 auto; width:168px; text-align:center; }
+.ops-conn{ flex:0 0 auto; width:96px; height:2px; margin-top:25px;
+background-image:repeating-linear-gradient(90deg, rgba(255,255,255,0.5) 0 6px, transparent 6px 12px);
+background-size:12px 2px; }
+.ops-steps.show .ops-conn{ animation:march .8s linear infinite; }
+@keyframes march{ from{ background-position:0 0; } to{ background-position:12px 0; } }
+.ops-ic{ height:52px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; }
+.ops-ic svg{ width:50px; height:50px; stroke:#fff; stroke-width:1.4; fill:none; overflow:visible; }
+.ops-ic svg *{ vector-effect:non-scaling-stroke; }
+.ic-morning{ stroke-linecap:round; }
+.ic-morning .sun{ transform-box:fill-box; transform-origin:center bottom; animation:rise 5s ease-out infinite; }
+@keyframes rise{ 0%{ transform:translateY(4px); opacity:0; } 28%{ transform:translateY(-1.5px); opacity:1; } 100%{ transform:translateY(-1.5px); opacity:1; } }
+.ic-morning .rays line{ transform-box:fill-box; transform-origin:center; }
+.ic-morning .r4{ animation:rayA 5s ease-out infinite; }
+.ic-morning .r2{ animation:rayB 5s ease-out infinite; }
+.ic-morning .r1{ animation:rayC 5s ease-out infinite; }
+.ic-morning .r3{ animation:rayD 5s ease-out infinite; }
+.ic-morning .r5{ animation:rayE 5s ease-out infinite; }
+@keyframes rayA{ 0%,28%{ opacity:0; transform:scale(.5); } 29.5%{ opacity:1; transform:scale(1.18); } 32%,100%{ opacity:1; transform:scale(1); } }
+@keyframes rayB{ 0%,30.5%{ opacity:0; transform:scale(.5); } 32%{ opacity:1; transform:scale(1.18); } 34.5%,100%{ opacity:1; transform:scale(1); } }
+@keyframes rayC{ 0%,33%{ opacity:0; transform:scale(.5); } 34.5%{ opacity:1; transform:scale(1.18); } 37%,100%{ opacity:1; transform:scale(1); } }
+@keyframes rayD{ 0%,35.5%{ opacity:0; transform:scale(.5); } 37%{ opacity:1; transform:scale(1.18); } 39.5%,100%{ opacity:1; transform:scale(1); } }
+@keyframes rayE{ 0%,38%{ opacity:0; transform:scale(.5); } 39.5%{ opacity:1; transform:scale(1.18); } 42%,100%{ opacity:1; transform:scale(1); } }
+.ic-abacus .bead{ transform-box:fill-box; transform-origin:center; }
+.ic-abacus .m1{ animation:mv1 5s ease-in-out infinite; }
+.ic-abacus .m2{ animation:mv2 5s ease-in-out infinite; }
+.ic-abacus .m3{ animation:mv3 5s ease-in-out infinite; }
+@keyframes mv1{ 0%{ transform:translateX(0); } 8%{ transform:translateX(4px); } 48%{ transform:translateX(4px); } 56%{ transform:translateX(0); } 100%{ transform:translateX(0); } }
+@keyframes mv2{ 0%,8%{ transform:translateX(0); } 16%{ transform:translateX(-4px); } 56%{ transform:translateX(-4px); } 64%{ transform:translateX(0); } 100%{ transform:translateX(0); } }
+@keyframes mv3{ 0%,16%{ transform:translateX(0); } 24%{ transform:translateX(4px); } 64%{ transform:translateX(4px); } 72%{ transform:translateX(0); } 100%{ transform:translateX(0); } }
+.ic-cards .cd{ transform-box:fill-box; transform-origin:center; animation:deal 8s ease-in-out infinite; }
+.ic-cards .cd:nth-child(1){ animation-delay:0s; }
+.ic-cards .cd:nth-child(2){ animation-delay:-2s; }
+.ic-cards .cd:nth-child(3){ animation-delay:-4s; }
+.ic-cards .cd:nth-child(4){ animation-delay:-6s; }
+@keyframes deal{
+0%{ transform:translate(0,0); opacity:1; }
+12%{ transform:translate(var(--sx,15px),0); opacity:0; }
+12.5%{ transform:translate(0,15px); opacity:0; }
+37.5%{ transform:translate(0,15px); opacity:0; }
+50%{ transform:translate(0,10px); opacity:1; }
+62.5%{ transform:translate(0,10px); opacity:1; }
+75%{ transform:translate(0,5px); opacity:1; }
+87.5%{ transform:translate(0,5px); opacity:1; }
+100%{ transform:translate(0,0); opacity:1; }
+}
+.ic-bars rect{ stroke:none; }
+.ops-step h4{ font-size:15px; font-weight:700; color:#fff; margin-bottom:6px; }
+.ops-step p{ font-size:12.5px; color:rgba(255,255,255,0.55); line-height:1.5; }
+.ops-step, .ops-conn{ opacity:0; transform:translateY(12px); transition:opacity .55s ease, transform .55s ease; }
+.ops-steps.show .ops-step, .ops-steps.show .ops-conn{ opacity:1; transform:none; }
+.ops-steps.show > *:nth-child(1){ transition-delay:.10s; }
+.ops-steps.show > *:nth-child(2){ transition-delay:.20s; }
+.ops-steps.show > *:nth-child(3){ transition-delay:.30s; }
+.ops-steps.show > *:nth-child(4){ transition-delay:.40s; }
+.ops-steps.show > *:nth-child(5){ transition-delay:.50s; }
+.ops-steps.show > *:nth-child(6){ transition-delay:.60s; }
+.ops-steps.show > *:nth-child(7){ transition-delay:.70s; }
+.not{ background:var(--card); border-radius:12px; padding:44px 40px; }
+.not h2{ font-size:28px; }
+.not p{ font-size:16px; color:#374151; line-height:1.7; max-width:680px; margin-top:14px; }
+.badges{ display:flex; gap:10px; flex-wrap:wrap; margin-top:26px; }
+.tbadge{ display:flex; align-items:center; gap:9px; padding:10px 16px; background:var(--bg); border-radius:100px; font-size:13px; font-weight:600; color:#111; }
+.tbadge .tb-i{ width:22px; height:22px; border-radius:6px; background:#111; display:flex; align-items:center; justify-content:center; }
+.tbadge .tb-i svg{ width:12px; height:12px; stroke:#fff; stroke-width:2.4; fill:none; }
+footer{ background:var(--dark); color:#fff; padding:52px 0 40px; margin-top:20px; }
+.foot-top{ display:flex; justify-content:space-between; align-items:center; padding-bottom:28px; border-bottom:1px solid rgba(255,255,255,0.1); }
+.foot-wm{ height:30px; width:auto; filter:brightness(0) invert(1); }
+.foot-links{ display:flex; gap:28px; }
+.foot-links a{ color:rgba(255,255,255,0.55); text-decoration:none; font-size:14px; }
+.foot-links a:hover{ color:#fff; }
+.disclaimer{ font-size:12px; font-style:italic; color:rgba(255,255,255,0.4); line-height:1.6; margin-top:22px; max-width:820px; }
+.copy{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(255,255,255,0.3); margin-top:16px; letter-spacing:.3px; }
+@media (max-width:900px){
+.hero .container{ grid-template-columns:1fr; gap:40px; }
+h1{ font-size:38px; }
+.grid3{ grid-template-columns:1fr; }
+.ops{ padding:34px 24px; }
+.ops-steps{ flex-direction:column; align-items:stretch; justify-content:flex-start; }
+.ops-steps.show{ max-height:1700px; }
+.ops-step{ width:100%; display:flex; gap:18px; text-align:left; align-items:flex-start; }
+.ops-ic{ margin:0; flex-shrink:0; height:auto; }
+.ops-ic svg{ width:40px; height:40px; }
+.ops-conn{ width:2px; height:26px; margin:4px 0 4px 19px;
+background-image:repeating-linear-gradient(180deg, rgba(255,255,255,0.55) 0 6px, transparent 6px 12px);
+background-size:2px 12px; }
+.ops-steps.show .ops-conn{ animation:march-v .8s linear infinite; }
+@keyframes march-v{ from{ background-position:0 0; } to{ background-position:0 12px; } }
+.foot-top{ flex-direction:column; gap:20px; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+<div class="stickytop">
+<!-- Until the community is agreed: <div class="mock-note">Official tool of the <b><a href="#" class="cl"><span class="rms">RMS</span> <span class="ec">Execution</span> <span class="rms">Community</span></a></b> · Early access for U.S. CEF income investors</div> -->
+<div class="mock-note">Preview · not public · Early access for U.S. CEF income investors</div>
+<nav>
+<div class="container">
+<div class="brand">
+<img class="wm" src="../YILD-black.png" alt="YILD" height="34" onerror="this.style.display='none';document.getElementById('wt').style.display='inline'">
+<span id="wt" class="wordtext" style="display:none">YILD</span>
+</div>
+<div class="nav-links">
+<span class="nav-off">Pricing</span>
+<span class="nav-off">Method</span>
+<span class="nav-off">About</span>
+<a href="#" class="btn dark" onclick="openReq();return false;">Request access</a>
+</div>
+</div>
+</nav>
+</div>
+<div class="hero">
+<div class="container">
+<div class="hero-content">
+<span class="eyebrow">For CEF income investors · U.S. residents</span>
+<h1>CEF Income Investing.<br>Simplified.</h1>
+<div class="descriptor">Executing your rules, your way.</div>
+<p class="lede">YILD watches your closed-end fund portfolio and surfaces the day's signals - profit-taking, dividend timing, rotation - computed from your own settings and holdings. You decide and swipe. <br>Discipline, made frictionless, down to the exact lot.</p>
+<div class="cta-row">
+<a href="#" class="btn dark" onclick="openReq();return false;">Request access</a>
+<a href="#how" class="btn ghost" onclick="openOps()">See how it works</a>
+</div>
+<div class="micro" style="color:#374151;">Works on desktop (PC/Mac) &amp; mobile</div>
+</div>
+<div class="hero-visual">
+<div class="stack">
+<div class="stack-head">
+<span class="stack-title">Today · Consider</span>
+<span class="market-tag">● Live</span>
+</div>
+<div class="sc sell" id="slot0">
+<div class="sc-pill">
+<div class="sc-pill-left"><span class="sc-ticker eq"><span class="blur">XXX</span> <span class="sc-yld">7.9%</span></span></div>
+<span class="sc-type">Marker Sell</span>
+</div>
+<div class="sc-body">
+<div class="sc-name"><span class="blur">Closed-end fund name</span></div>
+<div class="sc-row"><div class="sc-badges"><span class="sc-badge gain">+$142 profit</span><span class="sc-badge win">At target</span></div><div class="sc-actions"><span class="sc-act sc-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="sc-act sc-v"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg></span></div></div>
+</div>
+</div>
+<div class="sc buy" id="slot1">
+<div class="sc-pill">
+<div class="sc-pill-left"><span class="sc-ticker tx"><span class="blur">XXXX</span> <span class="sc-yld">13.6%</span></span></div>
+<span class="sc-type">Position Buyback</span>
+</div>
+<div class="sc-body">
+<div class="sc-name"><span class="blur">Closed-end fund name</span></div>
+<div class="sc-row"><div class="sc-badges"><span class="sc-badge gain">Below cost</span><span class="sc-badge urg">Ex in 2 days</span></div><div class="sc-actions"><span class="sc-act sc-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="sc-act sc-v"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg></span></div></div>
+</div>
+</div>
+<div class="sc sell" id="slot2">
+<div class="sc-pill">
+<div class="sc-pill-left"><span class="sc-ticker tf"><span class="blur">XXX</span> <span class="sc-yld">6.4%</span></span></div>
+<span class="sc-type">Double Dip</span>
+</div>
+<div class="sc-body">
+<div class="sc-name"><span class="blur">Closed-end fund name</span></div>
+<div class="sc-row"><div class="sc-badges"><span class="sc-badge gain">+$63 profit</span></div><div class="sc-actions"><span class="sc-act sc-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="sc-act sc-v"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg></span></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="what">
+<div class="container">
+<span class="sec-label">What it does</span>
+<h2>Your portfolio, read every few minutes.</h2>
+<p class="sec-sub">The hours watching the market and the work you'd otherwise do by hand.</p>
+<div class="grid3">
+<div class="fcard">
+<div class="ficon"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6"/><path d="M21 7h-6"/></svg></div>
+<h3>No more screen time</h3>
+<p>You set the rules, and YILD reads the market against them all day with live prices. Let the market come to you.</p>
+</div>
+<div class="fcard">
+<div class="ficon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="2.6"/><path d="M5 6v4.5c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6"/><path d="M5 12.5v4.5c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-4.5"/></svg></div>
+<h3>No bookkeeping</h3>
+<p>YILD keeps your per-lot ledger, every buy with its own cost. LIFO - never your broker's blended average.</p>
+</div>
+<div class="fcard">
+<div class="ficon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+<h3>Dividend timing</h3>
+<p>YILD tracks every ex-date across your funds, so the buyback lands before the distribution, not after.</p>
+</div>
+<div class="fcard">
+<div class="ficon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+<h3>Working capital, not noise</h3>
+<p>Cost-basis working capital and realized income, the way income investors read it. Not market-value swings.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="how" style="padding-top:0;">
+<div class="container">
+<div class="ops">
+<div class="ops-lead">
+<h2>A discipline, made daily.</h2>
+<p>CEF income investing has a method: take profit when it's there, never miss a dividend, and manage working capital instead of chasing market value. Built for investors who follow the RMS method. YILD helps you run that method every day - without spreadsheets or manual bookkeeping. It turns the method into a clean operating layer for your own holdings, your own rules, and your own income strategy. Where most fintech adds complexity, YILD removes it: deliberate workflows, quiet interfaces, and zero noise.</p>
+<button class="ops-btn" id="opsBtn" onclick="toggleOps()">
+<svg class="ic-layer" viewBox="0 0 24 24"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>
+<span>Operating layer</span>
+<svg class="ic-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+</button>
+</div>
+<div class="ops-steps" id="opsSteps">
+<div class="ops-step">
+<div class="ops-ic"><svg viewBox="0 0 24 24">
+<g class="ic-morning">
+<clipPath id="sunClip"><rect x="0" y="0" width="24" height="19.5"/></clipPath>
+<g clip-path="url(#sunClip)">
+<g class="sun">
+<path d="M7 19.5 a5 5 0 0 1 10 0"/>
+</g>
+</g>
+<g class="rays">
+<line class="r1" x1="12" y1="5.5" x2="12" y2="8"/>
+<line class="r2" x1="4.7" y1="8.2" x2="6.3" y2="9.8"/>
+<line class="r3" x1="19.3" y1="8.2" x2="17.7" y2="9.8"/>
+<line class="r4" x1="2.5" y1="14.5" x2="4.6" y2="14.5"/>
+<line class="r5" x1="21.5" y1="14.5" x2="19.4" y2="14.5"/>
+</g>
+<line class="horizon" x1="2.5" y1="19.5" x2="21.5" y2="19.5"/>
+</g>
+</svg></div>
+<h4>Broker synced</h4>
+<p>Every morning, YILD pulls your holdings, trades, and distributions from your broker - the source of truth. Synced through the API you authorized.</p>
+</div>
+<div class="ops-conn"></div>
+<div class="ops-step">
+<div class="ops-ic"><svg viewBox="0 0 24 24">
+<g class="ic-abacus">
+<rect x="3.5" y="4" width="17" height="16" rx="1.5"/>
+<line x1="3.5" y1="8.7" x2="20.5" y2="8.7"/>
+<line x1="3.5" y1="12" x2="20.5" y2="12"/>
+<line x1="3.5" y1="15.3" x2="20.5" y2="15.3"/>
+<circle cx="15" cy="8.7" r="1.6" fill="#fff"/>
+<circle class="bead m1" cx="7" cy="8.7" r="1.6" fill="#2D2D2D"/>
+<circle class="bead m2" cx="11" cy="12" r="1.6" fill="#fff"/>
+<circle class="bead m2" cx="14.5" cy="12" r="1.6" fill="#2D2D2D"/>
+<circle cx="18" cy="12" r="1.6" fill="#2D2D2D"/>
+<circle cx="15" cy="15.3" r="1.6" fill="#fff"/>
+<circle class="bead m3" cx="7" cy="15.3" r="1.6" fill="#2D2D2D"/>
+</g>
+</svg></div>
+<h4>Reconciled</h4>
+<p>YILD rebuilds your own per-lot ledger - positions, dividends, realized gains and working capital. True to cost - not average, not broker-restrained.</p>
+</div>
+<div class="ops-conn"></div>
+<div class="ops-step">
+<div class="ops-ic"><svg viewBox="0 0 24 24">
+<g class="ic-cards">
+<rect class="cd" x="5" y="6" width="14" height="3.4" rx="0.8" fill="#2D2D2D"/>
+<rect class="cd" x="5" y="6" width="14" height="3.4" rx="0.8" fill="#2D2D2D"/>
+<rect class="cd" x="5" y="6" width="14" height="3.4" rx="0.8" fill="#2D2D2D"/>
+<rect class="cd" x="5" y="6" width="14" height="3.4" rx="0.8" fill="#2D2D2D"/>
+</g>
+</svg></div>
+<h4>One-swipe</h4>
+<p>What crossed your thresholds shows up as a card. You see the full order and swipe once. That's it. Order sent to your own broker.</p>
+</div>
+<div class="ops-conn"></div>
+<div class="ops-step">
+<div class="ops-ic"><svg viewBox="0 0 24 24">
+<g class="ic-bars">
+<clipPath id="barsClip"><rect x="1" y="2" width="22" height="18.5"/></clipPath>
+<g clip-path="url(#barsClip)"><g id="barrow"></g></g>
+</g>
+</svg></div>
+<h4>End-to-end execution</h4>
+<p>Every trade is tracked and the bookkeeping is done for you. Follow your capital gains and realized income as the day unfolds. Without the hassle.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="not" style="padding-top:0;">
+<div class="container">
+<div class="not">
+<span class="sec-label">Compliance</span>
+<h2>Secure by design.</h2>
+<p>YILD displays rule-based signals from the holdings, settings, and data you control - nothing more. YILD does not recommend securities and does not manage accounts. It sends only the orders you approve, one at a time, to your own broker. Your trading credentials never leave your machine. YILD never holds them. You authorize through your broker's own API and can revoke it at any time. YILD holds no funds and never takes custody of assets. You are a customer of your broker, not of YILD; YILD has no part in any transaction. No discretionary management, no standing orders, no broker scraping, no credential sharing, and no unsupported account access. Every decision, every trade, every data source, and every setting remains yours, with full transparency.</p>
+<div class="badges">
+<span class="tbadge"><span class="tb-i"><svg viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></span>Authorized API</span>
+<span class="tbadge"><span class="tb-i"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>Credentials stay with you</span>
+<span class="tbadge"><span class="tb-i"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span>Your broker</span>
+<span class="tbadge"><span class="tb-i"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9-2.3.9-5.5-4-3.9 5.5-.8z"/></svg></span>Your rules</span>
+<span class="tbadge"><span class="tb-i"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>You decide</span>
+</div>
+</div>
+</div>
+</section>
+<footer>
+<div class="container">
+<div class="foot-top">
+<img class="foot-wm" src="../YILD-black.png" alt="YILD" height="30" loading="lazy" onerror="this.style.display='none'">
+<div class="foot-links">
+<span class="nav-off">Pricing</span>
+<span class="nav-off">Method</span>
+<span class="nav-off">About</span>
+<a href="#" onclick="openReq();return false;">Request access</a>
+<span class="nav-off">Terms</span>
+</div>
+</div>
+<p class="disclaimer">YILD displays rule-based portfolio signals based on user-defined settings and holdings data. YILD does not provide investment advice and does not recommend securities. It sends only the orders you approve, one at a time, to your own broker. Tickers, yields and figures shown are illustrative examples only - not recommendations, holdings or performance figures. Closed-end fund investing involves risk, including possible loss of principal.</p>
+<!-- Until the community is agreed: <p class="disclaimer" style="margin-top:14px">Official tool of the <a href="#" class="cl"><span class="rms">RMS</span> <span class="ec">Execution</span> <span class="rms">Community</span></a>.</p> -->
+<p class="copy">© 2026 YILD · Executing your rules, your way.</p>
+</div>
+</footer>
+<div class="req-ov" id="reqOv" onclick="if(event.target===this)closeReq()">
+<div class="req">
+<h3>Request access</h3>
+<p>Tell us a little about yourself. This opens an email to hello@yild.app in your own mail app.</p>
+<form onsubmit="return sendReq(event)">
+<label for="rq-name">Name</label>
+<input id="rq-name" type="text" required autocomplete="name">
+<div class="row">
+<div><label for="rq-state">State of residence</label><input id="rq-state" type="text" required placeholder="e.g. Washington"></div>
+<div><label for="rq-country">Country</label><input id="rq-country" type="text" required value="United States"></div>
+</div>
+<label for="rq-exp">Experience with CEF trading</label>
+<select id="rq-exp" required>
+<option value="" disabled selected>Choose</option>
+<option>0–1 years</option>
+<option>1–2 years</option>
+<option>2+ years</option>
+</select>
+<label for="rq-rms">Experience with RMS</label>
+<select id="rq-rms" required>
+<option value="" disabled selected>Choose</option>
+<option>0–1 years</option>
+<option>1–2 years</option>
+<option>2+ years</option>
+</select>
+<div class="acts">
+<button type="button" class="btn ghost" onclick="closeReq()">Cancel</button>
+<button type="submit" class="btn dark">Send request</button>
+</div>
+</form>
+</div>
+</div>
+<script>
+function openReq(){ document.getElementById('reqOv').classList.add('show'); setTimeout(function(){ document.getElementById('rq-name').focus(); },50); }
+function closeReq(){ document.getElementById('reqOv').classList.remove('show'); }
+function sendReq(e){
+e.preventDefault();
+var name=document.getElementById('rq-name').value.trim();
+var st=document.getElementById('rq-state').value.trim();
+var co=document.getElementById('rq-country').value.trim();
+var ex=document.getElementById('rq-exp').value;
+var rms=document.getElementById('rq-rms').value;
+var subject='YILD access request: '+name;
+var body='Name: '+name+'\nState of residence: '+st+'\nCountry: '+co+'\nExperience with CEF trading: '+ex+'\nExperience with RMS: '+rms+'\n';
+window.location.href='mailto:hello@yild.app?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+closeReq();
+return false;
+}
+document.addEventListener('keydown',function(ev){ if(ev.key==='Escape') closeReq(); });
+function toggleOps(){
+var s=document.getElementById('opsSteps');
+var b=document.getElementById('opsBtn');
+var open=s.classList.toggle('show');
+b.classList.toggle('open', open);
+}
+function openOps(){
+var s=document.getElementById('opsSteps');
+var b=document.getElementById('opsBtn');
+if(!s.classList.contains('show')){ s.classList.add('show'); b.classList.add('open'); }
+}
+var POOL = [
+{ t:'XXX', cat:'eq', yld:'7.9%', name:'Closed-end fund name', side:'sell', type:'Marker Sell', b:[{c:'gain',x:'+$142 profit'},{c:'win',x:'At target'}] },
+{ t:'XXXX', cat:'tx', yld:'13.6%', name:'Closed-end fund name', side:'buy', type:'Position Buyback', b:[{c:'urg',x:'Ex in 2 days'},{c:'gain',x:'Below cost'}] },
+{ t:'XXX', cat:'tf', yld:'6.4%', name:'Closed-end fund name', side:'sell', type:'Double Dip', b:[{c:'gain',x:'+$63 profit'}] },
+{ t:'XXXX', cat:'eq', yld:'7.2%', name:'Closed-end fund name', side:'sell', type:'LIFO Sell', b:[{c:'gain',x:'+$96 profit'}] },
+{ t:'XXX', cat:'tx', yld:'9.8%', name:'Closed-end fund name', side:'sell', type:'Overweight', b:[{c:'gain',x:'+$210 profit'},{c:'win',x:'At target'}] },
+{ t:'XXXX', cat:'tf', yld:'6.1%', name:'Closed-end fund name', side:'buy', type:'Add to position', b:[{c:'gain',x:'Below cost'},{c:'urg',x:'Ex tomorrow'}] },
+{ t:'XXX', cat:'eq', yld:'8.0%', name:'Closed-end fund name', side:'sell', type:'Marker Sell', b:[{c:'gain',x:'+$74 profit'}] },
+{ t:'XXXX', cat:'tx', yld:'11.2%', name:'Closed-end fund name', side:'buy', type:'Position Buyback', b:[{c:'gain',x:'Below cost'}] },
+{ t:'XXX', cat:'eq', yld:'9.5%', name:'Closed-end fund name', side:'sell', type:'LIFO Sell', b:[{c:'gain',x:'+$118 profit'}] },
+{ t:'XXXX', cat:'tf', yld:'6.6%', name:'Closed-end fund name', side:'sell', type:'Double Dip', b:[{c:'gain',x:'+$52 profit'}] },
+{ t:'XXX', cat:'eq', yld:'8.4%', name:'Closed-end fund name', side:'sell', type:'Overweight', b:[{c:'gain',x:'+$160 profit'},{c:'win',x:'At target'}] },
+{ t:'XXXX', cat:'tx', yld:'12.1%', name:'Closed-end fund name', side:'buy', type:'Add to position', b:[{c:'urg',x:'Ex in 3 days'},{c:'gain',x:'Below cost'}] },
+{ t:'XXX', cat:'eq', yld:'7.7%', name:'Closed-end fund name', side:'sell', type:'Marker Sell', b:[{c:'gain',x:'+$85 profit'}] },
+{ t:'XXXX', cat:'tx', yld:'10.6%', name:'Closed-end fund name', side:'sell', type:'LIFO Sell', b:[{c:'gain',x:'+$134 profit'}] },
+{ t:'XXX', cat:'tf', yld:'6.3%', name:'Closed-end fund name', side:'buy', type:'Position Buyback', b:[{c:'gain',x:'Below cost'},{c:'urg',x:'Ex tomorrow'}] },
+{ t:'XXXX', cat:'eq', yld:'8.9%', name:'Closed-end fund name', side:'sell', type:'Double Dip', b:[{c:'gain',x:'+$102 profit'},{c:'win',x:'At target'}] },
+{ t:'XXX', cat:'tx', yld:'9.1%', name:'Closed-end fund name', side:'sell', type:'Overweight', b:[{c:'gain',x:'+$77 profit'}] },
+{ t:'XXXX', cat:'tf', yld:'6.8%', name:'Closed-end fund name', side:'sell', type:'Marker Sell', b:[{c:'gain',x:'+$59 profit'}] },
+{ t:'XXX', cat:'eq', yld:'7.4%', name:'Closed-end fund name', side:'sell', type:'LIFO Sell', b:[{c:'gain',x:'+$91 profit'}] },
+{ t:'XXXX', cat:'tx', yld:'9.7%', name:'Closed-end fund name', side:'buy', type:'Add to position', b:[{c:'gain',x:'Below cost'}] }
+];
+var stack = document.querySelector('.stack');
+var shown = [0,1,2];
+function cardHTML(d){
+var bs = d.b.slice().sort(function(a,b){ return (b.c==='gain') - (a.c==='gain'); });
+var badges = bs.map(function(bd){ return '<span class="sc-badge '+bd.c+'">'+bd.x+'</span>'; }).join('');
+return '<div class="sc-pill"><div class="sc-pill-left"><span class="sc-ticker '+d.cat+'"><span class="blur">'+d.t+'</span> <span class="sc-yld">'+d.yld+'</span></span></div><span class="sc-type">'+d.type+'</span></div>'
++ '<div class="sc-body"><div class="sc-name"><span class="blur">'+d.name+'</span></div><div class="sc-row"><div class="sc-badges">'+badges+'</div>'
++ '<div class="sc-actions"><span class="sc-act sc-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="sc-act sc-v"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg></span></div></div></div>';
+}
+function pickNext(){
+var n; do { n = Math.floor(Math.random()*POOL.length); } while (shown.indexOf(n) >= 0);
+return n;
+}
+function tick(){
+var cards = Array.prototype.slice.call(stack.querySelectorAll('.sc'));
+if (cards.length < 3) return;
+var top = cards[0], mid = cards[1], bot = cards[2];
+var v = (Math.random() < 0.5);
+var dir = v ? 1 : -1;
+var btn = top.querySelector(v ? '.sc-v' : '.sc-x');
+if (btn) { btn.classList.add('hit'); setTimeout(function(){ btn.classList.remove('hit'); }, 300); }
+setTimeout(function(){
+var H = top.offsetHeight + 10;
+var W = top.offsetWidth + 60;
+top.style.transition = 'transform .5s ease-in';
+top.style.transform  = 'translateX(' + (dir * W) + 'px)';
+setTimeout(function(){
+var n = pickNext();
+shown.shift(); shown.push(n);
+var d = POOL[n];
+top.className = 'sc ' + d.side;
+top.innerHTML = cardHTML(d);
+stack.appendChild(top);
+mid.style.transition = 'none'; mid.style.transform = 'translateY(' + H + 'px)';
+bot.style.transition = 'none'; bot.style.transform = 'translateY(' + H + 'px)';
+top.style.transition = 'none'; top.style.transform = 'translateY(' + H + 'px)';
+void stack.offsetWidth;
+mid.style.transition = 'transform .5s ease'; mid.style.transform = 'none';
+bot.style.transition = 'transform .5s ease'; bot.style.transform = 'none';
+top.style.transition = 'transform .5s ease'; top.style.transform = 'none';
+}, 540);
+}, 380);
+}
+setInterval(tick, 4200);
+(function(){
+var cds = document.querySelectorAll('.ic-cards .cd');
+function rnd(){ return (Math.random() < 0.5 ? '-15px' : '15px'); }
+cds.forEach(function(c){
+c.style.setProperty('--sx', rnd());
+c.addEventListener('animationiteration', function(){ c.style.setProperty('--sx', rnd()); });
+});
+})();
+(function(){
+var barrow = document.getElementById('barrow');
+if (!barrow) return;
+var NS = 'http://www.w3.org/2000/svg';
+var P = 3.5, W = 2.9, BASE = 20, N = 7, DUR = 1500, GDUR = 301;
+var bars = [];
+for (var i=0;i<N;i++){
+var r = document.createElementNS(NS,'rect');
+r.setAttribute('x', (1 + i*P).toFixed(2));
+r.setAttribute('width', W);
+r.setAttribute('rx', 0.4);
+r.setAttribute('fill', '#fff');
+r.style.transformBox = 'fill-box';
+r.style.transformOrigin = 'center bottom';
+barrow.appendChild(r);
+bars.push(r);
+}
+function rndH(){ return 4 + Math.random()*12; }
+function setH(r, h){ r.setAttribute('y', (BASE - h).toFixed(2)); r.setAttribute('height', h.toFixed(2)); }
+for (var i=0;i<N;i++){ setH(bars[i], rndH()); bars[i].style.transform = 'scaleY(1)'; }
+bars[N-1].style.transform = 'scaleY(0)';
+function loop(){
+barrow.style.transition = 'transform ' + DUR + 'ms linear';
+barrow.style.transform = 'translateX(-' + P + 'px)';
+setTimeout(function(){
+bars[N-1].style.transition = 'transform ' + GDUR + 'ms ease-out';
+bars[N-1].style.transform = 'scaleY(1)';
+}, Math.round(DUR * 0.55));
+setTimeout(function(){
+for (var i=0;i<N-1;i++){ setH(bars[i], parseFloat(bars[i+1].getAttribute('height'))); }
+setH(bars[N-1], rndH());
+for (var i=0;i<N;i++){ bars[i].style.transition = 'none'; bars[i].style.transform = 'scaleY(1)'; }
+bars[N-1].style.transform = 'scaleY(0)';
+barrow.style.transition = 'none';
+barrow.style.transform = 'translateX(0)';
+barrow.getBoundingClientRect();
+setTimeout(loop, 30);
+}, DUR);
+}
+setTimeout(loop, 400);
+})();
+</script>
+</body>
+</html>
